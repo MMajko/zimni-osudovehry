@@ -1,0 +1,30 @@
+{
+  "name": "zimni-osudovehry",
+  "version": "1.0.0",
+  "description": "Microsite with registration form for event Zimni Osudove Hry",
+  "main": "src/index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MMajko/zimni-osudovehry.git"
+  },
+  "keywords": [
+    "osudove",
+    "hry",
+    "zimni",
+    "osudove",
+    "hry"
+  ],
+  "author": "Marian Hlavac",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MMajko/zimni-osudovehry/issues"
+  },
+  "homepage": "https://github.com/MMajko/zimni-osudovehry#readme",
+  "devDependencies": {
+    "webpack": "^1.12.9",
+    "webpack-dev-server": "^1.14.0"
+  }
+}
