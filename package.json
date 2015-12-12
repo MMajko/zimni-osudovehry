@@ -24,6 +24,10 @@
   },
   "homepage": "https://github.com/MMajko/zimni-osudovehry#readme",
   "devDependencies": {
+    "autoprefixer-loader": "^3.1.0",
+    "css-loader": "^0.23.0",
+    "node-sass": "^3.4.2",
+    "sass-loader": "^3.1.2",
     "webpack": "^1.12.9",
     "webpack-dev-server": "^1.14.0"
   }
