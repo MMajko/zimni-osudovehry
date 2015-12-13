@@ -55,6 +55,12 @@
       color: #498FB3;
     }
   }
+
+  @media #{$mobile} {
+    width: 100%;
+    float: none;
+    padding: 0;
+  }
 }
 
 .registration-instructions {
@@ -109,6 +115,13 @@
     height: .10em;
     border-radius: .25em;
   }
+
+  @media #{$mobile} {
+    width: 100%;
+    float: none;
+    padding: 0;
+    border: none;
+  }
 }
 
 .registration-confirmation {
@@ -116,6 +129,12 @@
   float: left;
   padding: 1em 4em 0 2em;
   margin-top: 3em;
+
+  @media #{$mobile} {
+    width: 100%;
+    float: none;
+    padding: 0;
+  }
 }
 
 .registration-confirmation-processing {

@@ -1,6 +1,6 @@
 .hero-unit {
   min-height: 100vh;
-  padding: 17% 0 5% 0;
+  padding: 300px 0 75px 0;
   text-align: center;
   background: url('../img/background.jpg') no-repeat center / cover;
 
@@ -42,6 +42,35 @@
     &:hover {
       background: white;
       color: #498FB3;
+    }
+  }
+
+  @media #{$tablet} {
+    padding: 220px 0 75px 0;
+
+    h1 {
+      font-size: 4vw;
+    }
+
+    .hero-unit-subtitle {
+      font-size: .9em;
+    }
+  }
+
+  @media #{$mobile} {
+    h1 {
+      font-size: 8vw;
+      padding: .5em 1em;
+    }
+
+    .hero-unit-subtitle {
+      font-size: .8em;
+      padding: 0 2em;
+    }
+
+    .hero-unit-meta {
+      padding: 1em 0;
+      font-size: 1.2em;
     }
   }
 }

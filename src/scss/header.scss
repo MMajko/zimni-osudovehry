@@ -3,6 +3,10 @@ header {
   top: 10vh;
   width: 100%;
   text-align: center;
+
+  @media #{$mobile} {
+    top: 0;
+  }
 }
 
 .main-nav {
@@ -14,6 +18,12 @@ header {
     padding: 0;
     list-style: none;
     text-align: center;
+
+    &:after {
+      content: '';
+      clear: both;
+      display: table;
+    }
   }
 
   li {
@@ -26,6 +36,16 @@ header {
     text-align: center;
     font-weight: bold;
     text-transform: uppercase;
+
+    @media #{$tablet} {
+      width: 7em;
+    }
+
+    @media #{$mobile} {
+      width: 50%;
+      float: left;
+      outline: 1px solid rgba(white, .2);
+    }
 
     a {
       display: inline-block;
@@ -43,6 +63,14 @@ header {
   .main-nav-space-item {
     display: inline-block;
     width: 200px;
+
+    @media #{$tablet} {
+      width: 150px;
+    }
+
+    @media #{$mobile} {
+      display: none;
+    }
   }
 }
 
@@ -63,4 +91,14 @@ header {
   width: 150px;
   top: -95px;
   animation: intro 1s;
+
+  @media #{$tablet} {
+    width: 100px;
+    top: -75px;
+  }
+
+  @media #{$mobile} {
+    position: static;
+    margin: 3em;
+  }
 }

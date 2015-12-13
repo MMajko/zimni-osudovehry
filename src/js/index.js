@@ -30,6 +30,8 @@ function rformGetData() {
 function rformSubmit(e) {
   e.preventDefault();
 
+  window.location.href = '#registration';
+
   if (!document.getElementById("rform-18").checked) {
     alert('Hele... Mrkni na název akce - Osudové hry. Hry o sud. Hry o sud \n \
 piva. PIVO. ALKOHOL. Musí ti být 18. Opravdu. Sorry.');

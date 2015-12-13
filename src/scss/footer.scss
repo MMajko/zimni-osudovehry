@@ -9,6 +9,13 @@ footer {
 .footer-col {
   float: left;
   width: 50%;
+
+  @media #{$mobile} {
+    float: none;
+    width: 100%;
+    padding: 1em 0;
+    text-align: center !important;
+  }
 }
 
 .footer-col--right {
