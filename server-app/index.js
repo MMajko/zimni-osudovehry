@@ -38,26 +38,38 @@ function createNewUserId(lastid) {
   return gamesIdentifier + (rawId + 1).toString().lpad('0',3);
 }
 
+function getCapacityCount(callback) {
+  ppl.find({}).exec(function (err, docs) {
+    callback({ registered: docs.length, capacity: gamesCapacity });
+  });
+}
+
 // Serve static files
 app.use(express.static('../dist'));
 
 // New user registration
 app.post('/register', function(req, res) {
-    ppl.find({}).sort({ registered: -1 }).limit(1).exec(function (err, docs) {
-      var newId = docs.length > 0 ? createNewUserId(docs[0].id) : gamesIdentifier + '000';
+  getCapacityCount(function (cap) {
+      if (cap.registered >= cap.capacity) {
+        res.send('you must be fun at parties, right?');
+        return;
+      }
 
-      registerNewUser(newId, req.body.name, req.body.surname, req.body.email,
-                      req.body.phone, function(err, docs) {
-                        console.log('Registered new user ' + newId);
-                        if (!err) res.send(newId);
-                      });
-    });
+      ppl.find({}).sort({ registered: -1 }).limit(1).exec(function (err, docs) {
+        var newId = docs.length > 0 ? createNewUserId(docs[0].id) : gamesIdentifier + '000';
+
+        registerNewUser(newId, req.body.name, req.body.surname, req.body.email,
+                        req.body.phone, function(err, docs) {
+          if (!err) res.send(newId);
+        });
+      });
+  });
 });
 
 // Capacity capacity-count
 app.get('/capacity', function(req, res) {
-  ppl.find({}).exec(function (err, docs) {
-    if (!err) res.send(docs.length + '/' + gamesCapacity);
+  getCapacityCount(function (cap) {
+      res.send(cap.registered + '/' + cap.capacity);
   });
 });
 
