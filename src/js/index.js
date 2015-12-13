@@ -27,6 +27,25 @@ function rformGetData() {
   return data.join('&').replace(/%20/g, '+');
 }
 
+function rformCheckFilled() {
+  var inputs = document.querySelectorAll('#rform input');
+  for (var i in inputs) {
+    if (inputs[i].value.length == 0) {
+      alert('Vyplňte prosím všechna pole, jsou povinná.');
+      return false;
+    }
+    if (inputs[i].name == 'email' && !(inputs[i].value.match(/\S+@\S+\.\S+/))) {
+      alert('Zadejte prosím validní e-mailovou adresu.');
+      return false;
+    }
+    if (inputs[i].name == 'phone' && !(inputs[i].value.match(/(\+[0-9]{12}|[0-9]{9})/))) {
+      alert('Zadejte prosím validní telefonní číslo.');
+      return false;
+    }
+  }
+  return true;
+}
+
 function rformSubmit(e) {
   e.preventDefault();
 
@@ -37,6 +56,8 @@ function rformSubmit(e) {
 piva. PIVO. ALKOHOL. Musí ti být 18. Opravdu. Sorry.');
     return;
   }
+
+  if (!rformCheckFilled()) return;
 
   hideElement('rform-container');
   showElement('confirmation');
