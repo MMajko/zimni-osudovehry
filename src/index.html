@@ -105,17 +105,26 @@
               </p>
               <div class="registration-confirmation-processed-payment">
                 <form class="registration-confirmation-processed-payment-paypal" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-                  <input type="hidden" name="cmd" value="_s-xclick">
-                  <input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----
-                  ">
+                  <input type="hidden" name="cmd" value="_xclick">
+                  <input type="hidden" name="business" value="hlavac95@gmail.com">
+                  <input type="hidden" name="lc" value="CZ">
+                  <input type="hidden" name="item_name" value="Zimni Osudove Hry 2016">
+                  <input type="hidden" name="item_number" value="73756416" id="paypal-id">
+                  <input type="hidden" name="amount" value="476.00">
+                  <input type="hidden" name="currency_code" value="CZK">
+                  <input type="hidden" name="button_subtype" value="services">
+                  <input type="hidden" name="tax_rate" value="0.000">
+                  <input type="hidden" name="shipping" value="0.00">
+                  <input type="hidden" name="bn" value="PP-BuyNowBF:t.t:NonHosted">
                   <input type="image" src="paypal-button.png" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
                   <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
                 </form>
 
+
                 <div class="registration-confirmation-processed-payment-or">nebo</div>
                 <ul>
                   <li><dt>Číslo účtu:</dt> <dd>1437536013&nbsp;/&nbsp;3030 (AirBank)</dd></li>
-                  <li><dt>Specifický symbol:</dt> <dd>73756416</dd></li>
+                  <li><dt>Specifický symbol:</dt> <dd id="specific-symbol">73756416</dd></li>
                   <li><dt>Variabilní symbol:</dt> <dd><span id="variable-symbol">######</span></dd></li>
                   <li><dt>Částka:</dt> <dd>450 Kč</dd></li>
                 </ul>

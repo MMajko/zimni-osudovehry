@@ -55,6 +55,9 @@ function rformReceive() {
       showElement('processed');
       hideElement('capacity');
       document.getElementById('variable-symbol').innerHTML = xhttp.responseText;
+      document.getElementById('paypal-id').value =
+                          document.getElementById('specific-symbol').innerHTML +
+                          xhttp.responseText;
     }
     else {
       showElement('not-processed');
