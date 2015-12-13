@@ -1,18 +1,30 @@
 require('../scss/main.scss');
-require('./form.js');
 
 require('file?name=logo.png!../img/logo.png');
 require('file?name=paypal-button.png!../img/paypal-button.png');
 
 var xhttp = new XMLHttpRequest();
-var endpoint = 'http://osudove-rest-endpoint.majko.cz';
+var endpoint = '.';
 
 function showElement(el) {
-  el.classList.remove('u-visuallyhidden');
+  document.getElementById(el).classList.remove('u-visuallyhidden');
 }
 
 function hideElement(el) {
-  el.classList.add('u-visuallyhidden');
+  document.getElementById(el).classList.add('u-visuallyhidden');
+}
+
+function rformGetData() {
+  var inputs = document.querySelectorAll('#rform input');
+  var data = [];
+
+  for (var input of inputs) {
+    data.push(
+      encodeURIComponent(input.name) + '=' + encodeURIComponent(input.value)
+    );
+  }
+
+  return data.join('&').replace(/%20/g, '+');
 }
 
 function rformSubmit(e) {
@@ -24,30 +36,28 @@ piva. PIVO. ALKOHOL. Musí ti být 18. Opravdu. Sorry.');
     return;
   }
 
-  hideElement(document.getElementById('rform-container'));
-  showElement(document.getElementById('confirmation'));
-  showElement(document.getElementById('processing'));
+  hideElement('rform-container');
+  showElement('confirmation');
+  showElement('processing');
 
-  var data = new FormData(document.getElementById('rform'));
   xhttp.open('POST', endpoint + '/register', true);
+  xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
   xhttp.onreadystatechange = rformReceive;
-  xhttp.send(data);
+  xhttp.send(rformGetData());
 }
 
 function rformReceive() {
   setTimeout(function () {
-    showElement(document.getElementById('confirmation'));
-    hideElement(document.getElementById('processing'));
+    showElement('confirmation');
+    hideElement('processing');
 
     if(xhttp.readyState == 4 && xhttp.status == 200) {
-      showElement(document.getElementById('processed'));
-      document.getElementById('variable-symbol').innerText = xhttp.responseText;
-      
-      document.getElementById('capacity').innerText =
-                    parseInt(document.getElementById('capacity').innerText) + 1;
+      showElement('processed');
+      hideElement('capacity');
+      document.getElementById('variable-symbol').innerHTML = xhttp.responseText;
     }
     else {
-      showElement(document.getElementById('not-processed'));
+      showElement('not-processed');
     }
 
   }, 2000);
