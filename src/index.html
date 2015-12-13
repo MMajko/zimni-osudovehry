@@ -143,7 +143,7 @@
               k chybě v appce. Někdo to blbě napsal. :D
             </div>
           </div>
-          <aside class="registration-instructions">
+          <aside class="registration-instructions" id="instructions">
             <h2>Informace</h2>
             <ul class="registration-instructions-list">
               <li><p>
@@ -166,16 +166,16 @@
               <h2>Kapacita</h2>
               <p>Kapacita ještě nebyla naplněna.</p>
               <div class="registration-instructions-capacity">
-                zbývá <strong>15</strong> míst
+                zbývá <strong id="capacity-count">?</strong> míst
                 <div class="registration-instructions-capacity-bar">
                   <div class="registration-instructions-capacity-bar-inner"
-                        style="width: 100%;">
+                        style="width: 100%;" id="capacity-bar">
                   </div>
                 </div>
               </div>
             </div>
           </aside>
-          <div class="registration-closed u-visuallyhidden">
+          <div class="registration-closed u-visuallyhidden" id="reg-closed">
             Registrace jsou uzavřeny, sorry. Buď se vyčerpala kapacita, nebo je někde v něčem chyba.
           </div>
         </div>

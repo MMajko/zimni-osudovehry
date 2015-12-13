@@ -5,6 +5,7 @@ var express = require('express'),
     bodyParser = require('body-parser');
 
 var gamesIdentifier = '101';
+var gamesCapacity = 16;
 
 var port = process.env.PORT || 80;
 var app = express();
@@ -51,6 +52,13 @@ app.post('/register', function(req, res) {
                         if (!err) res.send(newId);
                       });
     });
+});
+
+// Capacity capacity-count
+app.get('/capacity', function(req, res) {
+  ppl.find({}).exec(function (err, docs) {
+    if (!err) res.send(docs.length + '/' + gamesCapacity);
+  });
 });
 
 // Dumping users database

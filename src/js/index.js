@@ -30,17 +30,19 @@ function rformGetData() {
 function rformCheckFilled() {
   var inputs = document.querySelectorAll('#rform input');
   for (var i in inputs) {
-    if (inputs[i].value.length == 0) {
-      alert('Vyplňte prosím všechna pole, jsou povinná.');
-      return false;
-    }
-    if (inputs[i].name == 'email' && !(inputs[i].value.match(/\S+@\S+\.\S+/))) {
-      alert('Zadejte prosím validní e-mailovou adresu.');
-      return false;
-    }
-    if (inputs[i].name == 'phone' && !(inputs[i].value.match(/(\+[0-9]{12}|[0-9]{9})/))) {
-      alert('Zadejte prosím validní telefonní číslo.');
-      return false;
+    if (typeof inputs[i].value !== 'undefined') {
+      if (inputs[i].value.length == 0) {
+        alert('Vyplňte prosím všechna pole, jsou povinná.');
+        return false;
+      }
+      if (inputs[i].name == 'email' && !(inputs[i].value.match(/\S+@\S+\.\S+/))) {
+        alert('Zadejte prosím validní e-mailovou adresu.');
+        return false;
+      }
+      if (inputs[i].name == 'phone' && !(inputs[i].value.match(/(\+[0-9]{12}|[0-9]{9})/))) {
+        alert('Zadejte prosím validní telefonní číslo.');
+        return false;
+      }
     }
   }
   return true;
@@ -89,4 +91,26 @@ function rformReceive() {
   }, 2000);
 }
 
+function getCapacityCount() {
+  xhttp.open('GET', endpoint + '/capacity');
+  xhttp.onreadystatechange = writeCapacityCount;
+  xhttp.send();
+}
+
+function writeCapacityCount() {
+  if(xhttp.readyState == 4 && xhttp.status == 200) {
+    var capacity = xhttp.responseText.split('/');
+    console.log(capacity);
+    document.getElementById('capacity-count').innerHTML = capacity[1] - capacity[0];
+    document.getElementById('capacity-bar').style.width = Math.round(((capacity[1] - capacity[0]) / capacity[1]) * 100) + '%';
+
+    if (capacity[1] <= capacity[0]) {
+      showElement('reg-closed');
+      hideElement('rform-container');
+      hideElement('instructions');
+    }
+  }
+}
+
 document.getElementById('rform').addEventListener('submit', rformSubmit);
+window.addEventListener('load', getCapacityCount);
