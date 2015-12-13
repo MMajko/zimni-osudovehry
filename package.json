@@ -2,7 +2,7 @@
   "name": "zimni-osudovehry",
   "version": "1.0.0",
   "description": "Microsite with registration form for event Zimni Osudove Hry",
-  "main": "src/index.html",
+  "main": "server-app/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
