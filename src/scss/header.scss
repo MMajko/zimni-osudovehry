@@ -1,0 +1,66 @@
+header {
+  position: absolute;
+  top: 10vh;
+  width: 100%;
+  text-align: center;
+}
+
+.main-nav {
+  width: 100%;
+  background: rgba(white, .25);
+
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-align: center;
+  }
+
+  li {
+    display: inline-block;
+  }
+
+  .main-nav-item {
+    display: inline-block;
+    width: 10em;
+    text-align: center;
+    font-weight: bold;
+    text-transform: uppercase;
+
+    a {
+      display: inline-block;
+      color: white;
+      text-decoration: none;
+      padding: .8em;
+    }
+
+    &:hover {
+      background: white;
+      a { color: #498FB3; }
+    }
+  }
+
+  .main-nav-space-item {
+    display: inline-block;
+    width: 200px;
+  }
+}
+
+@keyframes intro {
+  from {
+    opacity: .5;
+    transform: scale(0.9);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.logo {
+  position: relative;
+  width: 150px;
+  top: -95px;
+  animation: intro 1s;
+}

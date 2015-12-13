@@ -1,5 +1,9 @@
 @import url(https://fonts.googleapis.com/css?family=Lato:400,700&subset=latin,latin-ext);
 
+* {
+  box-sizing: border-box;
+}
+
 html {
   font-family: 'Lato', sans-serif;
 }
@@ -7,3 +11,40 @@ html {
 body {
   margin: 0;
 }
+
+.u-visuallyhidden {
+  display: none;
+}
+
+.u-container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+p {
+  line-height: 1.7;
+}
+
+a {
+  color: #498FB3;
+}
+
+section {
+  padding: 2em 0 4em 0;
+  text-align: center;
+
+  h1 {
+    text-align: center;
+    color: #333;
+    font-weight: bold;
+    line-height: 3;
+  }
+}
+
+@import 'header.scss';
+@import 'hero-unit.scss';
+@import 'registration.scss';
+@import 'about.scss';
+@import 'faq.scss';
+@import 'contact.scss';
+@import 'footer.scss';
