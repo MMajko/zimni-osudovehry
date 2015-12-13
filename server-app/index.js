@@ -2,7 +2,8 @@ var express = require('express'),
     Datastore = require('nedb'),
     ppl = new Datastore({ filename: './db/osudove-ppl.db', autoload: true }),
     cors = require('cors'),
-    bodyParser = require('body-parser');
+    bodyParser = require('body-parser'),
+    config = require('../config.js');
 
 var gamesIdentifier = '101';
 var gamesCapacity = 16;
@@ -27,7 +28,9 @@ function registerNewUser(id, name, surname, email, phone, callback) {
     surname: surname,
     email: email,
     phone: phone,
-    registered: new Date()
+    registered: new Date(),
+    paid: false,
+    valid: true
   }, function (err, docs) {
     callback(docs[0]);
   });
@@ -42,6 +45,10 @@ function getCapacityCount(callback) {
   ppl.find({}).exec(function (err, docs) {
     callback({ registered: docs.length, capacity: gamesCapacity });
   });
+}
+
+function authenticateWithToken(req) {
+  return req.query.token === config.accessToken;
 }
 
 // Serve static files
@@ -75,7 +82,26 @@ app.get('/capacity', function(req, res) {
 
 // Dumping users database
 app.get('/registered', function(req, res) {
-    res.send('okok');
+  if (!authenticateWithToken(req)) { res.send('err_accesstoken'); return;}
+
+  ppl.find({}).exec(function (err, docs) {
+    res.json(docs);
+  });
+})
+
+// Mark user as paid
+app.get('/markpaid', function(req, res) {
+  if (!authenticateWithToken(req)) { res.send('err_accesstoken'); return;}
+  ppl.update({id: req.query.id}, { $set: { paid: true} }, {}, function (err, numReplaced) {
+    res.send( numReplaced + ' documents updated. Close me.');
+  });
+})
+// Mark user as paid
+app.get('/markinvalid', function(req, res) {
+  if (!authenticateWithToken(req)) { res.send('err_accesstoken'); return;}
+  ppl.update({id: req.query.id}, { $set: { valid: false} }, {}, function (err, numReplaced) {
+    res.send( numReplaced + ' documents updated. Close me.');
+  });
 })
 
 var server = app.listen(port, function () {

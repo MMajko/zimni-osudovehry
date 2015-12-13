@@ -5,7 +5,8 @@ var webpack = require('webpack'),
 module.exports = {
     debug: true,
     entry: {
-        main: './src/js/index.js'
+        main: './src/js/index.js',
+        list: './src/js/list.js'
     },
     output: {
         path: path.join(__dirname, 'dist'),
@@ -14,8 +15,17 @@ module.exports = {
     plugins: [
       new HtmlWebpackPlugin({
         title: 'ZOH',
+        filename: 'index.html',
         template: 'src/index.html',
-        inject: 'body'
+        inject: 'body',
+        chunks: ['main']
+      }),
+      new HtmlWebpackPlugin({
+        title: 'ZOH List',
+        filename: 'list.html',
+        template: 'src/list.html',
+        inject: 'body',
+        chunks: ['list']
       })
     ],
     module: {
