@@ -40,6 +40,9 @@
             aliquip ex ea commodo consequat. Duis aute irure dolor in
             reprehenderit in voluptate velit esse cillum dolore.
           </p>
+          <p class="hero-unit-meta">
+            26. - 28. února 2016, Sedlčany
+          </p>
           <a class="hero-unit-calltoaction" href="#registration">
             Chci se zúčastnit
           </a>
@@ -52,7 +55,7 @@
             Pokud se chcete zúčastnit Osudových her, nezbývá nic jiného, než
             se zaregistrovat a dorazit! Více informací níže.
           </p>
-          <div class="registration-form">
+          <div class="registration-form" id="rform-container">
             <form action="" id="rform">
               <label for="rform-name">Jméno</label>
               <input type="text" name="name" id="rform-name">
@@ -71,6 +74,64 @@
 
               <button type="submit">Zaregistrovat se</button>
             </form>
+          </div>
+          <div class="registration-confirmation u-visuallyhidden" id="confirmation">
+            <div class="registration-confirmation-processing u-visuallyhidden" id="processing">
+              <span class="registration-confirmation-processing-progress">
+                Zpracováváme vaši registraci... Dejte nám chvilku.
+              </span>
+              <div class="registration-confirmation-processing-sssh">
+                (Posíláme to do osudí. Nebo do sudu? Teď nevim.)
+              </div>
+            </div>
+            <div class="registration-confirmation-processed u-visuallyhidden" id="processed">
+              <div class="registration-confirmation-processed-tick">
+                 	&#9989;
+              </div>
+              <h3>All good!</h3>
+              <p>
+                Registrace proběhla úspěšně! Díky že jste se rozhodli s námi
+                zkusit úplně nové Osudovky! Bude to super!
+              </p>
+              <p>
+                Ale nezapomeňte, že neplatí, dokud neobdržíme platbu.
+                Budeme na ni čekat 4 dny. Pokud už teď víte, že to nedáte,
+                napište nám, podržíme vám místo déle.
+              </p>
+              <p>
+                Zaplatit můžete převodem nebo PayPalem. Pamatujte však, že
+                PayPal nám účtuje za platbu poplatky a nemůžeme je vzít na
+                vlastní triko. Sorry.
+              </p>
+              <div class="registration-confirmation-processed-payment">
+                <form class="registration-confirmation-processed-payment-paypal" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+                  <input type="hidden" name="cmd" value="_s-xclick">
+                  <input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----
+                  ">
+                  <input type="image" src="paypal-button.png" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+                  <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+                </form>
+
+                <div class="registration-confirmation-processed-payment-or">nebo</div>
+                <ul>
+                  <li><dt>Číslo účtu:</dt> <dd>1437536013&nbsp;/&nbsp;3030 (AirBank)</dd></li>
+                  <li><dt>Specifický symbol:</dt> <dd>73756416</dd></li>
+                  <li><dt>Variabilní symbol:</dt> <dd><span id="variable-symbol">######</span></dd></li>
+                  <li><dt>Částka:</dt> <dd>450 Kč</dd></li>
+                </ul>
+              </div>
+              <p class="registration-confirmation-processed-cash">
+                Pokud se známe (nebo se alespoň někde vídáme, ve škole třeba),
+                tak nám to můžete dát i v hotovosti osobně. Napište nebo zavolejte.
+              </p>
+              <p class="registration-confirmation-processed-thanks">
+                Ještě jednou mockrát děkujeme za projevený zájem. Těšíme se!
+              </p>
+            </div>
+            <div class="registration-confirmation-error u-visuallyhidden" id="not-processed">
+              Oops. Registrace se nezdařila. Napište nám mail, tady jasně došlo
+              k chybě v appce. Někdo to blbě napsal. :D
+            </div>
           </div>
           <aside class="registration-instructions">
             <h2>Informace</h2>
@@ -102,6 +163,9 @@
               </div>
             </div>
           </aside>
+          <div class="registration-closed u-visuallyhidden">
+            Registrace jsou uzavřeny, sorry. Buď se vyčerpala kapacita, nebo je někde v něčem chyba.
+          </div>
         </div>
       </section>
       <section class="about" id="about">
