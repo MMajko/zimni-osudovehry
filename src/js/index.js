@@ -3,6 +3,7 @@ require('../scss/main.scss');
 require('file?name=logo.png!../img/logo.png');
 require('file?name=paypal-button.png!../img/paypal-button.png');
 require('file?name=opengraph.jpg!../img/opengraph.jpg');
+require('file?name=favicon.ico!../img/favicon.ico');
 
 var xhttp = new XMLHttpRequest();
 var endpoint = '.';
