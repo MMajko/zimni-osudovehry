@@ -1,11 +1,3 @@
-.faq {
-  margin: 0 -1.5em;
-
-  @media #{$mobile} {
-    margin: 0;
-  }
-}
-
 .faq:after {
   content: '';
   display: table;
