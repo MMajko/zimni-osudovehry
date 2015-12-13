@@ -16,16 +16,21 @@ function hideElement(el) {
 }
 
 function rformSubmit(e) {
+  e.preventDefault();
+
+  if (!document.getElementById("rform-18").checked) {
+    alert('Hele... Mrkni na název akce - Osudové hry. Hry o sud. Hry o sud \n \
+piva. PIVO. ALKOHOL. Musí ti být 18. Opravdu. Sorry.');
+    return;
+  }
+
   hideElement(document.getElementById('rform-container'));
   showElement(document.getElementById('confirmation'));
   showElement(document.getElementById('processing'));
-  e.preventDefault();
 
   var data = new FormData(document.getElementById('rform'));
   xhttp.open('POST', endpoint + '/register', true);
   xhttp.onreadystatechange = rformReceive;
-  xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-  xhttp.setRequestHeader('Connection', 'close');
   xhttp.send(data);
 }
 
@@ -37,6 +42,9 @@ function rformReceive() {
     if(xhttp.readyState == 4 && xhttp.status == 200) {
       showElement(document.getElementById('processed'));
       document.getElementById('variable-symbol').innerText = xhttp.responseText;
+      
+      document.getElementById('capacity').innerText =
+                    parseInt(document.getElementById('capacity').innerText) + 1;
     }
     else {
       showElement(document.getElementById('not-processed'));
