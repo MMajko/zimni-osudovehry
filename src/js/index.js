@@ -100,6 +100,8 @@ function getCapacityCount() {
 function writeCapacityCount() {
   if(xhttp.readyState == 4 && xhttp.status == 200) {
     var capacity = xhttp.responseText.split('/');
+    capacity[0] = parseInt(capacity[0]);
+    capacity[1] = parseInt(capacity[1]);
     document.getElementById('capacity-count').innerHTML = capacity[1] - capacity[0];
     document.getElementById('capacity-bar').style.width = Math.round(((capacity[1] - capacity[0]) / capacity[1]) * 100) + '%';
 
