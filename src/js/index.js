@@ -39,7 +39,7 @@ function rformCheckFilled() {
         alert('Zadejte prosím validní e-mailovou adresu.');
         return false;
       }
-      if (inputs[i].name == 'phone' && !(inputs[i].value.match(/(\+[0-9]{12}|[0-9]{9})/))) {
+      if (inputs[i].name == 'phone' && !(inputs[i].value.match(/^(\+[0-9]{12}|[0-9]{9})$/))) {
         alert('Zadejte prosím validní telefonní číslo.');
         return false;
       }
