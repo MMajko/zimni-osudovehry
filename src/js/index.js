@@ -18,9 +18,9 @@ function rformGetData() {
   var inputs = document.querySelectorAll('#rform input');
   var data = [];
 
-  for (var input of inputs) {
+  for (var i in inputs) {
     data.push(
-      encodeURIComponent(input.name) + '=' + encodeURIComponent(input.value)
+      encodeURIComponent(inputs[i].name)+'='+encodeURIComponent(inputs[i].value)
     );
   }
 
