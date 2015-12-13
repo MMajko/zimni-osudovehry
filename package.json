@@ -5,7 +5,8 @@
   "main": "server-app/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server-app/index.js"
+    "build": "webpack",
+    "start": "npm run build;cd server-app;node index.js"
   },
   "repository": {
     "type": "git",
