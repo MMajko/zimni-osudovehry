@@ -2,8 +2,10 @@
 
 ![Screenshot](http://i.imgur.com/q5TntwE.jpg)
 
-Microsite providing important information and simple registration for event **Zimni Osudove Hry 2015**, special
+Microsite providing important information and simple registration for event **Zimni Osudove Hry 2016**, special
 weekend edition of beer games *Osudove hry*.
+
+[(http://zimni.osudovehry.cz](http://zimni.osudovehry.cz)
 
 ## Installation
 
