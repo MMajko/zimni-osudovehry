@@ -2,7 +2,7 @@
 
 ![Screenshot](http://i.imgur.com/q5TntwE.jpg)
 
-Microsite providing simple registration for event **Zimni Osudove Hry 2015**, special
+Microsite providing important information and simple registration for event **Zimni Osudove Hry 2015**, special
 weekend edition of beer games *Osudove hry*.
 
 ## Installation
@@ -11,11 +11,15 @@ Make sure you have Node.js installed on your system.
 
 Install dependencies
 
-  npm install
+```
+npm install
+```
 
 Build and run server
 
-  npm start
+```
+npm start
+```
 
 Change the access token in `config.js` file.
 
