@@ -79,7 +79,7 @@ app.post('/register', function(req, res) {
         registerNewUser(newId, req.body.name, req.body.surname, req.body.email,
                         req.body.phone, function(err, docs) {
           var email = {
-            to: [req.query.email],
+            to: [req.body.email],
             from: 'registrace@zimni.osudovehry.cz',
             subject: 'Registrace na Zimní Osudové Hry 2016',
             html: createMailTemplate(newId)
