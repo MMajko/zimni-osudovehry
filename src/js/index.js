@@ -4,6 +4,7 @@ require('file?name=logo.png!../img/logo.png');
 require('file?name=paypal-button.png!../img/paypal-button.png');
 require('file?name=opengraph.jpg!../img/opengraph.jpg');
 require('file?name=favicon.ico!../img/favicon.ico');
+require('file?name=mail-header.jpg!../img/mail-header.jpg');
 
 var xhttp = new XMLHttpRequest();
 var endpoint = '.';

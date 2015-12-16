@@ -3,7 +3,18 @@ var express = require('express'),
     ppl = new Datastore({ filename: './db/osudove-ppl.db', autoload: true }),
     cors = require('cors'),
     bodyParser = require('body-parser'),
-    config = require('../config.js');
+    config = require('../config.js'),
+    nodemailer = require('nodemailer'),
+    sgTransport = require('nodemailer-sendgrid-transport'),
+    createMailTemplate = require('./mail-tpl.js')
+
+var mailerOptions = {
+    auth: {
+        api_key: config.sendGridApiKey
+    }
+}
+
+var mailer = nodemailer.createTransport(sgTransport(mailerOptions));
 
 var gamesIdentifier = '101';
 var gamesCapacity = 16;
@@ -67,6 +78,19 @@ app.post('/register', function(req, res) {
 
         registerNewUser(newId, req.body.name, req.body.surname, req.body.email,
                         req.body.phone, function(err, docs) {
+          var email = {
+            to: [req.query.email],
+            from: 'registrace@zimni.osudovehry.cz',
+            subject: 'Registrace na Zimní Osudové Hry 2016',
+            html: createMailTemplate(newId)
+          }
+
+          mailer.sendMail(email, function(err, info) {
+            if (err) {
+              console.log("Error: " + err)
+            }
+          })
+
           if (!err) res.send(newId);
         });
       });
