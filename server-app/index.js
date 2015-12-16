@@ -15,6 +15,7 @@ var mailerOptions = {
 }
 
 var mailer = nodemailer.createTransport(sgTransport(mailerOptions));
+var managementMail = "hlavac95@gmail.com"
 
 var gamesIdentifier = '101';
 var gamesCapacity = 16;
@@ -62,6 +63,36 @@ function authenticateWithToken(req) {
   return req.query.token === config.accessToken;
 }
 
+function sendMailAfterReg(destination, userId) {
+  var email = {
+    to: [destination],
+    from: 'registrace@zimni.osudovehry.cz',
+    subject: 'Registrace na Zimní Osudové Hry 2016',
+    html: createMailTemplate(userId)
+  }
+
+  mailer.sendMail(email, function(err, info) {
+    if (err) {
+      console.log("Error: " + err)
+    }
+  })
+}
+
+function notifyAboutFullCapacity() {
+  var email = {
+    to: [managementMail],
+    from: 'registrace@zimni.osudovehry.cz',
+    subject: 'Kapacita ZOH 2016 naplnena',
+    html: '<a href="http://zimni.osudovehry.cz">http://zimni.osudovehry.cz</a>'
+  }
+
+  mailer.sendMail(email, function(err, info) {
+    if (err) {
+      console.log("Error: " + err)
+    }
+  })
+}
+
 // Serve static files
 app.use(express.static('../dist'));
 
@@ -78,19 +109,10 @@ app.post('/register', function(req, res) {
 
         registerNewUser(newId, req.body.name, req.body.surname, req.body.email,
                         req.body.phone, function(err, docs) {
-          var email = {
-            to: [req.body.email],
-            from: 'registrace@zimni.osudovehry.cz',
-            subject: 'Registrace na Zimní Osudové Hry 2016',
-            html: createMailTemplate(newId)
-          }
 
-          mailer.sendMail(email, function(err, info) {
-            if (err) {
-              console.log("Error: " + err)
-            }
-          })
+          sendMailAfterReg(req.body.email, newId)
 
+          if (cap.registered + 1 == cap.capacity) notifyAboutFullCapacity()
           if (!err) res.send(newId);
         });
       });
