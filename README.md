@@ -5,7 +5,7 @@
 Microsite providing important information and simple registration for event **Zimni Osudove Hry 2016**, special
 weekend edition of beer games *Osudove hry*.
 
-[(http://zimni.osudovehry.cz](http://zimni.osudovehry.cz)
+[http://zimni.osudovehry.cz](http://zimni.osudovehry.cz)
 
 ## Installation
 
