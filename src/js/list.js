@@ -1,5 +1,7 @@
 require('../scss/list.scss');
 
+var jsonToTable = require('./json-to-table.js');
+
 var xhttp = new XMLHttpRequest();
 var endpoint = '.';
 
@@ -7,7 +9,7 @@ function displayTable() {
   if(xhttp.readyState == 4 && xhttp.status == 200) {
     var data = JSON.parse(xhttp.responseText);
 
-    
+
   }
 }
 
