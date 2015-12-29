@@ -54,7 +54,7 @@ function createNewUserId(lastid) {
 }
 
 function getCapacityCount(callback) {
-  ppl.find({}).exec(function (err, docs) {
+  ppl.find({valid: true}).exec(function (err, docs) {
     callback({ registered: docs.length, capacity: gamesCapacity });
   });
 }
