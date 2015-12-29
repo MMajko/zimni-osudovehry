@@ -9,7 +9,7 @@ function displayTable() {
   if(xhttp.readyState == 4 && xhttp.status == 200) {
     var data = JSON.parse(xhttp.responseText);
 
-
+    document.getElementById('table').innerHTML = jsonToTable(data)
   }
 }
 
