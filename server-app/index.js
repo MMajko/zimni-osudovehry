@@ -18,7 +18,7 @@ var mailer = nodemailer.createTransport(sgTransport(mailerOptions));
 var managementMail = "hlavac95@gmail.com"
 
 var gamesIdentifier = '101';
-var gamesCapacity = 16;
+var gamesCapacity = 21;
 
 var port = process.env.PORT || 80;
 var app = express();
