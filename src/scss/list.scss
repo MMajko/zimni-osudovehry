@@ -109,6 +109,15 @@ table a {
   table small {
     font-weight: normal;
   }
+
+  table a {
+    display: inline-block;
+    background: #eee;
+    width: 49%;
+    margin-right: .5%;
+    text-align: center;
+    line-height: 2.5;
+  }
 }
 
 @media print {
