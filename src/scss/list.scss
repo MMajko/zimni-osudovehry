@@ -78,6 +78,39 @@ table a {
   opacity: .8;
 }
 
+@media screen and (max-width: 720px) {
+  .wrap {
+    padding: 3rem 1rem;
+  }
+
+  .pre-header {
+    font-size: 1.1rem;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  table th, table td {
+    display: block;
+    border: 0;
+    padding: 0rem .25rem;
+  }
+
+  table tr {
+    display: block;
+    margin-bottom: 2rem;
+  }
+
+  table td:nth-child(3) {
+    font-weight: bold;
+  }
+
+  table small {
+    font-weight: normal;
+  }
+}
+
 @media print {
   table td:last-child, table th:last-child {
     display: none;
