@@ -130,7 +130,7 @@ app.get('/capacity', function(req, res) {
 app.get('/registered', function(req, res) {
   if (!authenticateWithToken(req)) { res.send('err_accesstoken'); return;}
 
-  ppl.find({}).exec(function (err, docs) {
+  ppl.find({}).sort({ registered: -1 }).exec(function (err, docs) {
     res.json(docs);
   });
 })
@@ -139,14 +139,16 @@ app.get('/registered', function(req, res) {
 app.get('/markpaid', function(req, res) {
   if (!authenticateWithToken(req)) { res.send('err_accesstoken'); return;}
   ppl.update({id: req.query.id}, { $set: { paid: true} }, {}, function (err, numReplaced) {
-    res.send( numReplaced + ' documents updated. Close me.');
+    res.setHeader("Location", "list.html?" + config.accessToken);
+    res.sendStatus(301);
   });
 })
 // Mark user as paid
 app.get('/markinvalid', function(req, res) {
   if (!authenticateWithToken(req)) { res.send('err_accesstoken'); return;}
-  ppl.update({id: req.query.id}, { $set: { valid: false} }, {}, function (err, numReplaced) {
-    res.send( numReplaced + ' documents updated. Close me.');
+  ppl.update({id: req.query.id}, { $set: { valid: false, paid: false } }, {}, function (err, numReplaced) {
+    res.setHeader("Location", "list.html?" + config.accessToken);
+    res.sendStatus(301);
   });
 })
 

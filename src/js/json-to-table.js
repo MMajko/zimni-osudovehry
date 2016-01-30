@@ -119,7 +119,7 @@ module.exports = function (parsedJson, tableId, tableClassName, linkText)
                         var value = parsedJson[i][headers[j]];
                         var isUrl = urlRegExp.test(value) || javascriptRegExp.test(value);
 
-                        if(isUrl)   // If value is URL we auto-create a link
+                        if(false)   // If value is URL we auto-create a link
                             tbCon += tdRow.format(link.format(value));
                         else
                         {

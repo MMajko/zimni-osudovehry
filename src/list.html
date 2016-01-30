@@ -7,21 +7,15 @@
   </head>
   <body>
     <div class="wrap">
-      <h1>Zimní Osudové Hry 2016 - seznam ucastniku</h1>
+      <header>
+        <strong class="pre-header"><img class="logo" src="logo.png" alt="Zimni osudove hry"> Zimní Osudové Hry 2016</strong>
+        <h1>Seznam účastníků</h1>
+      </header>
 
       <div id="table"></div>
 
-      <br><br>
-      <form action="/markpaid" method="get" target="_blank">
-        <input type="text" name="id" placeholder="id">
-        <input type="hidden" name="token">
-        <button>mark paid</button>
-      </form><br>
-      <form action="/markinvalid" method="get" target="_blank">
-        <input type="text" name="id" placeholder="id">
-        <input type="hidden" name="token">
-        <button>mark invalid</button>
-      </form>
+      <h2 class="invalid-table-header">Neplatné registrace</h2>
+      <div id="table-invalid"></div>
     </div>
   </body>
 </html>
