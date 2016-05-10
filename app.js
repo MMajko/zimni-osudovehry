@@ -9,7 +9,7 @@ var sassMiddleware = require('node-sass-middleware');
 var routes = require('./router');
 
 // TODO: use theme from environment!
-var __themedir = path.join(__dirname, 'theme/zimni-2016');
+var __themedir = path.join(__dirname, 'theme/' + (process.env.THEME || 'zimni-2016'));
 
 var app = express();
 
