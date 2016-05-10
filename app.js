@@ -17,7 +17,7 @@ var app = express();
 app.set('views', path.join(__themedir, 'views'));
 app.set('view engine', 'hbs');
 
-//app.use(favicon(path.join(__themedir, 'public', 'favicon.ico')));
+app.use(favicon(path.join(__themedir, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
