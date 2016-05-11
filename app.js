@@ -65,5 +65,12 @@ app.use((err, req, res, next) => {
   });
 });
 
+// lpad()
+String.prototype.lpad = function(padString, length) {
+    var str = this;
+    while (str.length < length)
+        str = padString + str;
+    return str;
+};
 
 module.exports = app;

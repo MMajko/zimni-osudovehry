@@ -38,7 +38,7 @@
       </header>
       <section class="hero-unit">
         <div class="u-container">
-          <h1>Zimní Osudové Hry 2016 jsou tady!</h1>
+          <h1>{{event.long_name}} jsou tady!</h1>
           <p class="hero-unit-subtitle">
             Sníh Osudovkám skvěle nahrává do karet. Ve sněhu se dají hrát
             skvělé hry nebo skvěle ležet po vypití sudu piva.
@@ -173,7 +173,7 @@
               <h2>Kapacita</h2>
               <p>Kapacita ještě nebyla naplněna.</p>
               <div class="registration-instructions-capacity">
-                zbývá <strong id="capacity-count">?</strong> míst
+                zbývá <strong id="capacity-count">{{capacityLeft}}</strong> míst
                 <div class="registration-instructions-capacity-bar">
                   <div class="registration-instructions-capacity-bar-inner"
                         style="width: 100%;" id="capacity-bar">
