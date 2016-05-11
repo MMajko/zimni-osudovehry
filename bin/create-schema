@@ -2,18 +2,40 @@
 
 require('dotenv').config();
 
-var database = require('../src/database.js');
+var promise = require('bluebird');
+
+var database = require('../src/database');
+var schema = require('../schema');
+var auth = require('../src/auth');
+
+var defaultPassword = Math.round(Math.random() * 88888 + 11111).toString();
 
 console.log('Creating database schema...');
-database.init().then(() => {
+
+promise.each(schema, (table) => {
+
+  // Sequentially create database tables
+  return database.knex.schema.createTableIfNotExists(table.name, table.cols).then();
+
+}).then(() => {
+
   console.log('Done.\nCreating default boss...');
-  return database.createDefaultBoss().then((password) => {
-    return password;
+
+  // Create default boss user
+  return database.knex('boss_users').truncate().insert({
+    username: 'boss',
+    password: auth.hashPassword(defaultPassword),
+    role: 'SUPERUSER'
   });
-}).then((password) => {
-  console.log('Created default boss:\n  username: boss\n  password: ' + password);
+
+}).then(() => {
+
+  console.log('Created default boss:\n  username: boss\n  password: ' + defaultPassword);
   process.exit(0);
+
 }).catch((err) => {
+
   console.error('Failed creating database schema: ' + err);
   process.exit(1);
+
 });

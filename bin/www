@@ -2,30 +2,19 @@
 
 require('dotenv').config();
 
-/**
- * Module dependencies.
- */
-
 var app = require('../app');
-var debug = require('debug')('osudove2:server');
+var debug = require('debug')('osudove:server');
 var http = require('http');
+var auth = require('./auth');
 
-/**
- * Get port from environment and store in Express.
- */
+/** Create server. */
 
 var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
-/**
- * Create HTTP server.
- */
-
 var server = http.createServer(app);
 
-/**
- * Listen on provided port, on all network interfaces.
- */
+/** Listen on provided port, on all network interfaces. */
 
 server.listen(port);
 server.on('error', onError);
