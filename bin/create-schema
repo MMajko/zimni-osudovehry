@@ -8,6 +8,12 @@ console.log('Creating database schema...');
 database.init().then(() => {
   console.log('Done.\nCreating default boss...');
   return database.createDefaultBoss().then((password) => {
-    console.log('Created default boss:\n  username: boss\n  password: ' + password);
+    return password;
   });
-}).then(() => { process.exit(0); });
+}).then((password) => {
+  console.log('Created default boss:\n  username: boss\n  password: ' + password);
+  process.exit(0);
+}).catch((err) => {
+  console.error('Failed creating database schema: ' + err);
+  process.exit(1);
+});
