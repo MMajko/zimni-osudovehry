@@ -7,9 +7,7 @@ var database = require('../src/database.js');
 console.log('Creating database schema...');
 database.init().then(() => {
   console.log('Done.\nCreating default boss...');
-  database.createDefaultBoss().then((password) => {
+  return database.createDefaultBoss().then((password) => {
     console.log('Created default boss:\n  username: boss\n  password: ' + password);
   });
-});
-
-return;
+}).then(() => { process.exit(0); });
