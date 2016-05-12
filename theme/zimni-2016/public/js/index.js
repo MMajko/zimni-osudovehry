@@ -1,120 +1,103 @@
-require('../scss/main.scss');
-
-require('file?name=logo.png!../img/logo.png');
-require('file?name=paypal-button.png!../img/paypal-button.png');
-require('file?name=opengraph.jpg!../img/opengraph.jpg');
-require('file?name=favicon.ico!../img/favicon.ico');
-require('file?name=mail-header.jpg!../img/mail-header.jpg');
-
-var xhttp = new XMLHttpRequest();
-var endpoint = '.';
-
-function showElement(el) {
-  document.getElementById(el).classList.remove('u-visuallyhidden');
+function validateEmail(email) {
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
 }
 
-function hideElement(el) {
-  document.getElementById(el).classList.add('u-visuallyhidden');
-}
+/**
+ * Simulate click when enter pressed on user check button.
+ */
 
-function rformGetData() {
-  var inputs = document.querySelectorAll('#rform input');
-  var data = [];
-
-  for (var i in inputs) {
-    data.push(
-      encodeURIComponent(inputs[i].name)+'='+encodeURIComponent(inputs[i].value)
-    );
+$('#rform-email').keyup(function(e){
+  if(e.keyCode == 13) {
+    $('#check-user').click();
   }
+});
 
-  return data.join('&').replace(/%20/g, '+');
-}
+/**
+ * Check user button behaviour.
+ */
 
-function rformCheckFilled() {
-  var inputs = document.querySelectorAll('#rform input');
-  for (var i in inputs) {
-    if (typeof inputs[i].value !== 'undefined') {
-      if (inputs[i].value.length == 0) {
-        alert('Vyplňte prosím všechna pole, jsou povinná.');
-        return false;
-      }
-      if (inputs[i].name == 'email' && !(inputs[i].value.match(/\S+@\S+\.\S+/))) {
-        alert('Zadejte prosím validní e-mailovou adresu.');
-        return false;
-      }
-      if (inputs[i].name == 'phone' && !(inputs[i].value.match(/^(\+[0-9]{12}|[0-9]{9})$/))) {
-        alert('Zadejte prosím validní telefonní číslo.');
-        return false;
-      }
-    }
-  }
-  return true;
-}
+$('#check-user').click(function (ev) {
+  var email = $('#rform input[name=email]').val();
 
-function rformSubmit(e) {
-  e.preventDefault();
-
-  window.location.href = '#registration';
-
-  if (!document.getElementById("rform-18").checked) {
-    alert('Hele... Mrkni na název akce - Osudové hry. Hry o sud. Hry o sud \n \
-piva. PIVO. ALKOHOL. Musí ti být 18. Opravdu. Sorry.');
+  if (!validateEmail(email)) {
+    alert('Uveďte platný e-mail.');
     return;
   }
 
-  if (!rformCheckFilled()) return;
+  // Check if user exists
+  $.getJSON('user-exists/' + email, function (response) {
 
-  hideElement('rform-container');
-  showElement('confirmation');
-  showElement('processing');
-
-  xhttp.open('POST', endpoint + '/register', true);
-  xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-  xhttp.onreadystatechange = rformReceive;
-  xhttp.send(rformGetData());
-}
-
-function rformReceive() {
-  setTimeout(function () {
-    showElement('confirmation');
-    hideElement('processing');
-
-    if(xhttp.readyState == 4 && xhttp.status == 200) {
-      showElement('processed');
-      hideElement('capacity');
-      document.getElementById('variable-symbol').innerHTML = xhttp.responseText;
-      document.getElementById('paypal-id').value =
-                          document.getElementById('specific-symbol').innerHTML +
-                          xhttp.responseText;
-    }
-    else {
-      showElement('not-processed');
+    if (response.result != 'ok') {
+      console.error(response.error);
+      alert('Došlo k chybě.');
+      return;
     }
 
-  }, 2000);
-}
+    if (response.exists) {
+      // Pre-fill his information, and allow him to skip the registration
+      var knownname = response.attendee.name + ' ' + response.attendee.surname;
+      $('#rform .known-name').text(knownname);
+      $('#rform-exists').val('on');
 
-function getCapacityCount() {
-  xhttp.open('GET', endpoint + '/capacity');
-  xhttp.onreadystatechange = writeCapacityCount;
-  xhttp.send();
-}
+      if (response.isAttending) {
+        // If he's event attending, offer user to show his registration details
+        $('.registration-form-done').removeClass('u-visuallyhidden');
+        var link = '/payment-details/' + response.attendee.id + '/' + response.attendee.secret;
+        $('#rform .known-url').attr('href', link);
+      } else {
+        $('.registration-form-known').removeClass('u-visuallyhidden');
+        $('.registration-form-submit').removeClass('u-visuallyhidden');
+      }
 
-function writeCapacityCount() {
-  if(xhttp.readyState == 4 && xhttp.status == 200) {
-    var capacity = xhttp.responseText.split('/');
-    capacity[0] = parseInt(capacity[0]);
-    capacity[1] = parseInt(capacity[1]);
-    document.getElementById('capacity-count').innerHTML = capacity[1] - capacity[0];
-    document.getElementById('capacity-bar').style.width = Math.round(((capacity[1] - capacity[0]) / capacity[1]) * 100) + '%';
-
-    if (capacity[1] <= capacity[0]) {
-      showElement('reg-closed');
-      hideElement('rform-container');
-      hideElement('instructions');
+    } else {
+      $('.registration-form-others').removeClass('u-visuallyhidden');
+      $('.registration-form-submit').removeClass('u-visuallyhidden');
+      $('#rform-exists').val('off');
     }
+
+    $('#rform input[name=email]').attr('disabled', 'disabled');
+    $('.registration-form-email').removeClass('registration-form-email--down');
+    $('#check-user').addClass('u-visuallyhidden');
+
+  }).fail(function() {
+    alert('Došlo k chybě.');
+  });
+});
+
+$('#rform .not-known').click(function (ev) {
+  ev.preventDefault();
+  $('.registration-form-email').addClass('registration-form-email--down');
+  $('.registration-form-submit').addClass('u-visuallyhidden');
+  $('#check-user').removeClass('u-visuallyhidden');
+  $('.registration-form-known').addClass('u-visuallyhidden');
+  $('#rform input[name=email]').removeAttr('disabled').focus();
+});
+
+$('#rform').submit(function (ev) {
+  var errors = [];
+  var exists = $('#rform-exists').val() == 'on';
+
+  if ($('#rform-name').val().length == 0) {
+    errors.push('Chybí jméno.');
   }
-}
 
-document.getElementById('rform').addEventListener('submit', rformSubmit);
-window.addEventListener('load', getCapacityCount);
+  if ($('#rform-surname').val().length == 0) {
+    errors.push('Chybí příjmení.');
+  }
+
+  if (!(/^[0-9]{9}$/).test($('#rform-phone').val())) {
+    errors.push('Špatné telefonní číslo.');
+  }
+
+  if (!$('#rform-18').is(':checked')) {
+    errors.push('Chybí potvrzení o věku.');
+  }
+
+  if (errors.length > 0 && !exists) {
+    ev.preventDefault();
+    alert('- ' + errors.join('\n- '));
+  } else {
+    $('#rform input[name=email]').removeAttr('disabled');
+  }
+});

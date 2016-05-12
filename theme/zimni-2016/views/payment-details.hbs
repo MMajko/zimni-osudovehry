@@ -1,0 +1,70 @@
+{{> head}}
+
+<div class="wrap">
+  <div class="u-container">
+    <section class="payment-details">
+      <a href="/" class="back-button">Hlavní stránka</a>
+
+      <h1>Registrace na {{event.long_name}} byla úspěšná.</h1>
+      <p>
+        Teď už opravdu nezbývá nic jiného, než akci zaplatit a natěšeně čekat, než přijde ten
+        moment, kdy začnou Osudové Hry, na které ses právě zaregistroval(a). Ještě jednou
+        bychom ti rádi poděkovali za projevený zájem a budeme se na tebe těšit!
+      </p>
+      <h2>Rekapitulace</h2>
+      <p>
+        <strong>Event:</strong> {{event.long_name}}<br>
+        <strong>Popis:</strong> {{event.description}}<br>
+        <strong>Od:</strong> {{date event.date_from}}<br>
+        <strong>Do:</strong> {{date event.date_to}}<br>
+        <strong>Cena:</strong> {{event.price}} czk
+      </p>
+      <h2>Stav registrace</h2>
+      <p class="reg-status">
+        {{status}}
+      </p>
+      <h2>Možnosti platby</h2>
+      <h3>Platba převodem</h3>
+      <p>
+        Platba převodem je easy, stačí naťukat a poslat. Platby zpracováváme ručně,
+        takže asi chvilku bude trvat, než se tady objeví, že jsme platbu přijali.
+        Pokud se ti bude zdát, že to trvá nějak dlouho, nebo cokoliv jiného nebude
+        v pořádku, napiš nám.
+      </p>
+      <div class="payment-info">
+        <div class="payment-info-column">
+          <dl>
+            <dt>Číslo účtu</dt>
+            <dd>{{event.payment_acc}}</dd>
+
+            <dt>Specifický symbol</dt>
+            <dd>{{specificSymbol}}</dd>
+
+            <dt>Variabilní symbol</dt>
+            <dd>{{variableSymbol}}</dd>
+          </dl>
+        </div>
+        <div class="payment-info-column">
+          <dl>
+            <dt>Banka</dt>
+            <dd><img src="/img/airbank.png" alt="AirBank"></dd>
+
+            <dt>Částka</dt>
+            <dd>{{event.price}} CZK</dd>
+          </dl>
+        </div>
+      </div>
+      <h3>Platba v hotovosti organizátorům</h3>
+      <p>
+        Protože se většinou všichni důvěrně známe, zaplatit můžete jakémukoliv organizátorovi,
+        kterého znáte, v hotovosti.
+      </p>
+      <p>
+        No a pokud se neznáme, ale chodíme alespoň na stejnou školu, nebo máš šanci nás potkat jinde,
+        odchytni si nás a máš šanci nás poznat ještě před Osudovkama.
+      </p>
+    </section>
+  </div>
+</div>
+
+{{> foot}}

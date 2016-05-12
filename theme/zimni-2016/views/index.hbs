@@ -1,19 +1,6 @@
-<!doctype html>
-<html>
-  <head>
-    <title>Zimní Osudové Hry 2016</title>
-    <meta charset="utf-8">
-    <meta name="description" content="Sníh Osudovkám skvěle nahrává do karet. Ve sněhu se dají hrát skvělé hry nebo skvěle ležet po vypití sudu piva. Tolik možností! Jenže všichni moc dobře víme, že v Praze sníh stojí pěkně za kočku. A tak pojedeme někam do přírody!">
-    <meta name="keywords" content="Osudové hry, Osudovky, Zimní osudové hry">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta property="og:title" content="Zimní Osudové Hry 2016">
-    <meta property="og:description" content="Sníh Osudovkám skvěle nahrává do karet. Ve sněhu se dají hrát skvělé hry nebo skvěle ležet po vypití sudu piva. Tolik možností! Jenže všichni moc dobře víme, že v Praze sníh stojí pěkně za kočku. A tak pojedeme někam do přírody!">
-    <meta property="og:url" content="http://zimni.osudovehry.cz">
-    <meta property="og:image" content="http://zimni.osudovehry.cz/opengraph.jpg">
-    <link rel="stylesheet" href="css/main.css" type="text/css">
-  </head>
-  <body>
-    <h1 class="u-visuallyhidden">Zimní Osudové Hry 2016</h1>
+{{> head}}
+
+    <h1 class="u-visuallyhidden">{{event.long_name}}</h1>
     <div class="wrap">
       <div class="wrap-backgroundimage"></div>
       <header>
@@ -34,7 +21,7 @@
             </li>
           </ul>
         </nav>
-        <img class="logo" src="img/logo.png" alt="Zimni osudove hry">
+        <img class="logo" src="img/logo.png" alt="{{event.long_name}}">
       </header>
       <section class="hero-unit">
         <div class="u-container">
@@ -62,129 +49,109 @@
             Pokud se chcete zúčastnit Osudových her, nezbývá nic jiného, než
             se zaregistrovat a dorazit! Více informací níže.
           </p>
-          <div class="registration-form" id="rform-container">
-            <form action="" id="rform">
-              <label for="rform-name">Jméno</label>
-              <input type="text" name="name" id="rform-name">
+          {{#if capacityLeft}}
+            <div class="registration-form">
+              <form action="register" method="post" id="rform">
+                <div class="registration-form-email registration-form-email--down">
+                  <label for="rform-email">E-Mail</label>
+                  <input id="rform-email" type="text" name="email">
+                </div>
 
-              <label for="rform-surname">Příjmení</label>
-              <input type="text" name="surname" id="rform-surname">
+                <div class="registration-form-others u-visuallyhidden">
+                  <label for="rform-name">Jméno</label>
+                  <input id="rform-name" type="text" name="name">
 
-              <label for="rform-email">E-Mail</label>
-              <input type="text" name="email" id="rform-email">
+                  <label for="rform-surname">Příjmení</label>
+                  <input id="rform-surname" type="text" name="surname">
 
-              <label for="rform-phone">Telefon</label>
-              <input type="text" name="phone" id="rform-phone">
+                  <label for="rform-phone">Telefon</label>
+                  <input id="rform-phone" type="text" name="phone">
 
-              <input type="checkbox" name="eighteen" id="rform-18">
-              <label for="rform-18">Potvrzuji, že jsem dosáhl 18 let věku</label>
+                  <input type="checkbox" name="eighteen" id="rform-18">
+                  <label for="rform-18">Potvrzuji, že jsem dosáhl 18 let věku</label>
 
-              <button type="submit">Zaregistrovat se</button>
-            </form>
-          </div>
-          <div class="registration-confirmation u-visuallyhidden" id="confirmation">
-            <div class="registration-confirmation-processing u-visuallyhidden" id="processing">
-              <span class="registration-confirmation-processing-progress">
-                Zpracováváme vaši registraci... Dejte nám chvilku.
-              </span>
-              <div class="registration-confirmation-processing-sssh">
-                (Posíláme to do osudí. Nebo do sudu? Teď nevim.)
-              </div>
+                  <input type="hidden" name="exists" id="rform-exists">
+                </div>
+
+                <div class="registration-form-known u-visuallyhidden">
+                  <p>Ahoj, <strong class="known-name">?</strong>!</p>
+                  <p>
+                    Vypadá to, že jsi už na Osudovkách předtím byl(a), takže registraci
+                    můžeme trochu urychlit.
+                  </p>
+                  <p>
+                    <small>
+                      <a href="#" class="not-known">
+                      Ale já nejsem <span class="known-name">ten kdo si myslíte</span>!
+                      </a>
+                    </small>
+                  </p>
+                </div>
+
+                <div class="registration-form-done u-visuallyhidden">
+                  <p>Ahoj, <strong class="known-name">?</strong>!</p>
+                  <p>
+                    Vypadá to, že na tyto Osudovky jsi už zaregistrovaný(á).<br>
+                    Ač by to asi bylo hrozně cool, víckrát se registrovat nejde.
+                  </p>
+                  <p>
+                    Pokud jsi se už registroval, můžeš si znovu
+                    <a href="/payment-details" class="known-url">otevřít údaje pro platbu.</a>
+                  </p>
+                  <p>
+                    <small>
+                      Pokud však jde o chybu a seš si jistý, že jsi se neregistroval,
+                      <a href="mailto:info@osudovehry.cz">
+                        kontaktuj nás.
+                      </a>
+                    </small>
+                  </p>
+                </div>
+
+                <button type="submit" class="registration-form-submit u-visuallyhidden">
+                  Zaregistrovat se
+                </button>
+              </form>
+              <button id="check-user">Pokračovat</button>
             </div>
-            <div class="registration-confirmation-processed u-visuallyhidden" id="processed">
-              <div class="registration-confirmation-processed-tick">
-                 	&#9989;
-              </div>
-              <h3>All good!</h3>
-              <p>
-                Registrace proběhla úspěšně! Díky že jste se rozhodli s námi
-                zkusit úplně nové Osudovky! Bude to super!
-              </p>
-              <p>
-                Ale nezapomeňte, že registrace neplatí, dokud neobdržíme platbu.
-                Budeme na ni čekat 4 dny. Pokud už teď víte, že to nedáte,
-                napište nám, podržíme vám místo déle.
-              </p>
-              <p>
-                Zaplatit můžete převodem nebo PayPalem. Pamatujte však, že
-                PayPal nám účtuje za platbu poplatky a nemůžeme je vzít na
-                vlastní triko. Sorry.
-              </p>
-              <div class="registration-confirmation-processed-payment">
-                <form class="registration-confirmation-processed-payment-paypal" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-                  <input type="hidden" name="cmd" value="_xclick">
-                  <input type="hidden" name="business" value="hlavac95@gmail.com">
-                  <input type="hidden" name="lc" value="CZ">
-                  <input type="hidden" name="item_name" value="Zimni Osudove Hry 2016">
-                  <input type="hidden" name="item_number" value="73756416" id="paypal-id">
-                  <input type="hidden" name="amount" value="476.00">
-                  <input type="hidden" name="currency_code" value="CZK">
-                  <input type="hidden" name="button_subtype" value="services">
-                  <input type="hidden" name="tax_rate" value="0.000">
-                  <input type="hidden" name="shipping" value="0.00">
-                  <input type="hidden" name="bn" value="PP-BuyNowBF:t.t:NonHosted">
-                  <input type="image" src="img/paypal-button.png" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-                  <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
-                </form>
-
-
-                <div class="registration-confirmation-processed-payment-or">nebo</div>
-                <ul>
-                  <!-- Don't forget to change server-app/mail-tpl.js when changing this ! -->
-                  <li><dt>Číslo účtu:</dt> <dd>1437536013&nbsp;/&nbsp;3030 (AirBank)</dd></li>
-                  <li><dt>Specifický symbol:</dt> <dd id="specific-symbol">73756416</dd></li>
-                  <li><dt>Variabilní symbol:</dt> <dd><span id="variable-symbol">######</span></dd></li>
-                  <li><dt>Částka:</dt> <dd>450 Kč</dd></li>
-                </ul>
-              </div>
-              <p class="registration-confirmation-processed-cash">
-                Pokud se známe (nebo se alespoň někde vídáme, ve škole třeba),
-                tak nám to můžete dát i v hotovosti osobně. Napište nebo zavolejte.
-              </p>
-              <p class="registration-confirmation-processed-thanks">
-                Ještě jednou mockrát děkujeme za projevený zájem. Těšíme se!
-              </p>
-            </div>
-            <div class="registration-confirmation-error u-visuallyhidden" id="not-processed">
-              Oops. Registrace se nezdařila. Napište nám mail, tady jasně došlo
-              k chybě v appce. Někdo to blbě napsal. :D
-            </div>
-          </div>
-          <aside class="registration-instructions" id="instructions">
-            <h2>Informace</h2>
-            <ul class="registration-instructions-list">
-              <li><p>
-                Tato registrace je něco jako závazná, tedy ihned po registraci
-                po vás budeme chtít provést platbu. Každá registrace, ke které
-                do čtyř dní neobdržíme platbu bude <strong>zrušena</strong>
-                a bude uvolněno vaše místo někomu jinému.
-              </p></li>
-              <li><p>
-                Cena za Zimní Osudové Hry 2016 je
-                <strong class="registration-instructions-list-price">450 Kč</strong>
-                za celou akci (dvě noci).
-              </p></li>
-              <li><p>
-                V ceně je zahrnut pronájem objektu, jídlo a materiál na hry.
-                V sobotu večer bude i sud piva, taky v ceně.
-              </p></li>
-            </ul>
-            <div id="capacity">
-              <h2>Kapacita</h2>
-              <p>Kapacita ještě nebyla naplněna.</p>
-              <div class="registration-instructions-capacity">
-                zbývá <strong id="capacity-count">{{capacityLeft}}</strong> míst
-                <div class="registration-instructions-capacity-bar">
-                  <div class="registration-instructions-capacity-bar-inner"
-                        style="width: 100%;" id="capacity-bar">
+            <aside class="registration-instructions">
+              <h2>Informace</h2>
+              <ul class="registration-instructions-list">
+                <li><p>
+                  Tato registrace je něco jako závazná, tedy ihned po registraci
+                  po vás budeme chtít provést platbu. Každá registrace, ke které
+                  do čtyř dní neobdržíme platbu bude <strong>zrušena</strong>
+                  a bude uvolněno vaše místo někomu jinému.
+                </p></li>
+                <li><p>
+                  Cena za Zimní Osudové Hry 2016 je
+                  <strong class="registration-instructions-list-price">450 Kč</strong>
+                  za celou akci (dvě noci).
+                </p></li>
+                <li><p>
+                  V ceně je zahrnut pronájem objektu, jídlo a materiál na hry.
+                  V sobotu večer bude i sud piva, taky v ceně.
+                </p></li>
+              </ul>
+              <div>
+                <h2>Kapacita</h2>
+                <p>Kapacita ještě nebyla naplněna.</p>
+                <div class="registration-instructions-capacity">
+                  zbývá <strong class="capacity-count">{{capacityLeft}}</strong> míst
+                  <div class="registration-instructions-capacity-bar">
+                    <div class="registration-instructions-capacity-bar-inner"
+                          style="width: {{capacityPercentage}}%;">
+                    </div>
                   </div>
                 </div>
               </div>
+            </aside>
+          {{else}}
+            <div class="registration-closed">
+              Je nám to líto, ale vypadá to, že byla vyčerpána kapacita. <br>
+              Ale zatím nezoufejte, většinou kapacitu navýšíme, sledujte naši facebook stránku!
             </div>
-          </aside>
-          <div class="registration-closed u-visuallyhidden" id="reg-closed">
-            Registrace jsou uzavřeny, sorry. Buď se vyčerpala kapacita, nebo je někde v něčem chyba.
-          </div>
+          {{/if}}
         </div>
       </section>
       <section class="about" id="about">
@@ -345,20 +312,5 @@
           </p>
         </div>
       </section>
-      <footer class="footer">
-        <div class="u-container">
-          <div class="footer-col footer-col--left">
-            Za celý tým organizátorů Osudových her<br>
-            <strong>děkujeme a těšíme se na vás!</strong>
-          </div>
-          <div class="footer-col footer-col--right">
-            <a href="http://majko.cz">Marián Hlaváč</a>, 2015<br>
-            <small>
-              <a href="http://github.com/mmajko/zimni-osudovehry">GitHub</a>
-            </small>
-          </div>
-        </div>
-      </footer>
-    </div>
-  </body>
-</html>
+
+{{> foot}}

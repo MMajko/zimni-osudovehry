@@ -24,7 +24,7 @@ function sendMail () {
 
 function sendRegistrationNotice () {
   return new promise((resolve, reject) => {
-
+    resolve();
   });
 }
 
@@ -34,7 +34,7 @@ function sendRegistrationNotice () {
 
 function sendLostRegistrationNotice () {
   return new promise((resolve, reject) => {
-
+    resolve();
   });
 }
 
@@ -44,7 +44,7 @@ function sendLostRegistrationNotice () {
 
 function sendPaymentNotice () {
   return new promise((resolve, reject) => {
-
+    resolve();
   });
 }
 
@@ -54,8 +54,14 @@ function sendPaymentNotice () {
 
 function sendCapacityNotice () {
   return new promise((resolve, reject) => {
-
+    resolve();
   });
 }
 
-module.exports = { sendMail };
+module.exports = {
+  sendMail,
+  sendRegistrationNotice,
+  sendLostRegistrationNotice,
+  sendPaymentNotice,
+  sendCapacityNotice
+};

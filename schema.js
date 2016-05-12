@@ -16,18 +16,19 @@ module.exports = [
       table.dateTime('date_to');
       table.integer('capacity');
       table.string('payment_acc');
-      table.string('payment_paypal');
+      table.integer('price');
     }
   },
-  // table: attendee
+  // table: attendees
   {
-    name: 'attendee',
+    name: 'attendees',
     cols: (table) => {
       table.increments();
       table.string('name');
       table.string('surname');
       table.string('email').unique();
       table.string('phone');
+      table.string('secret');
     }
   },
   // table: events_attendee
@@ -35,7 +36,7 @@ module.exports = [
     name: 'events_attendee',
     cols: (table) => {
       table.integer('event_id').references('events.id');
-      table.integer('attendee_id').references('attendee.id');
+      table.integer('attendee_id').references('attendees.id');
       table.dateTime('registered');
       table.dateTime('paid');
       table.string('status');

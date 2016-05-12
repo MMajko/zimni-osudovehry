@@ -35,6 +35,10 @@
     margin: .5rem .75rem;
   }
 
+  input[disabled] {
+    color: #888;
+  }
+
   button {
     background: #498FB3;
     display: block;
@@ -124,114 +128,13 @@
   }
 }
 
-.registration-confirmation {
-  width: 50%;
-  float: left;
-  padding: 1em 4em 0 2em;
-  margin-top: 3em;
-
-  @media #{$mobile} {
-    width: 100%;
-    float: none;
-    padding: 0;
-  }
+.registration-form-email {
+  transition: padding 1s;
+  padding-top: 0;
 }
 
-.registration-confirmation-processing {
-  font-size: 1.4em;
-  padding: 6em 0;
-
-  @keyframes pulse {
-    0% { opacity: 1; }
-    50% { opacity: .2; }
-    100% { opacity: 1; }
-  }
-
-  .registration-confirmation-processing-progress {
-    animation: pulse 2s infinite linear;
-  }
-
-  .registration-confirmation-processing-sssh {
-    color: gray;
-    padding: 2em;
-    font-size: .6em;
-  }
-}
-
-.registration-confirmation-processed {
-
-  @keyframes ticksuccess {
-    0% { transform: scale(1); }
-    25% { transform: scale(1); }
-    30% { transform: scale(1.2); }
-    40% { transform: scale(1); }
-    45% { transform: scale(1); }
-    50% { transform: scale(1.2); }
-    60% { transform: scale(1); }
-  }
-
-  .registration-confirmation-processed-tick {
-    color: #6ba239;
-    font-size: 5em;
-    padding-bottom: .5em;
-    animation: ticksuccess 1s linear;
-  }
-
-  .registration-confirmation-processed-payment {
-    background: #fafafa;
-    padding: 2em 1em;
-
-    input:hover {
-      opacity: .5;
-    }
-  }
-
-  .registration-confirmation-processed-payment-or {
-    color: gray;
-    font-size: .8;
-    padding: 1em 0;
-  }
-
-  ul {
-    list-style: none;
-    padding: 0 2em;
-    margin: 0;
-    text-align: left;
-    line-height: 1.7;
-  }
-
-  dt, dd {
-    display: inline-block;
-    padding: 0;
-    margin: 0;
-  }
-
-  dt {
-    width: 10em;
-    font-size: .8em;
-    font-weight: bold;
-  }
-
-  dd {
-    font-size: .95em;
-  }
-
-  .registration-confirmation-processed-cash {
-    padding: 0 2em;
-    font-size: .75em;
-    color: #777;
-  }
-
-  .registration-confirmation-processed-thanks {
-    padding: 1em 0;
-    font-size: 1.2em;
-  }
-}
-
-.registration-confirmation-error {
-  padding: 4em;
-  color: #b03b24;
-  line-height: 1.7;
+.registration-form-email--down {
+  padding-top: 8em;
 }
 
 .registration-closed {
@@ -244,4 +147,16 @@
     display: table;
     clear: both;
   }
+}
+
+.registration-form-known, .registration-form-done {
+  text-align: center;
+  color: #666;
+}
+
+.registration-form-done:before {
+  display: block;
+  content: '';
+  margin: 3em 3em 0 3em;
+  border-bottom: 5px solid #d77d55;
 }

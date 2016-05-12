@@ -16,7 +16,7 @@ body {
 }
 
 .u-visuallyhidden {
-  display: none;
+  display: none !important;
 }
 
 .u-container {
@@ -60,3 +60,4 @@ section {
 @import 'faq.scss';
 @import 'contact.scss';
 @import 'footer.scss';
+@import 'payment-details.scss';

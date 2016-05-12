@@ -5,17 +5,27 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var sassMiddleware = require('node-sass-middleware');
+var hbs = require('hbs');
 
-var routes = require('./router');
+var router = require('./router');
+var helpers = require('./src/helpers');
 
 // TODO: use theme from environment!
-var __themedir = path.join(__dirname, 'theme/' + (process.env.THEME || 'zimni-2016'));
+var __themedir = path.join(__dirname, 'theme', process.env.THEME || 'zimni-2016');
 
 var app = express();
 
-// view engine setup
+/**
+ * View engine setup.
+ */
+
 app.set('views', path.join(__themedir, 'views'));
 app.set('view engine', 'hbs');
+hbs.registerPartials(path.join(__themedir, 'views', 'partials'));
+
+/**
+ * Middlewares.
+ */
 
 app.use(favicon(path.join(__themedir, 'public', 'favicon.ico')));
 app.use(logger('dev'));
@@ -32,19 +42,22 @@ app.use(sassMiddleware({
 }));
 app.use(express.static(path.join(__themedir, 'public')));
 
-app.use('/', routes);
+/**
+ * Setup router.
+ */
 
-// catch 404 and forward to error handler
+app.use('/', router);
+
+/**
+ * Error handlers.
+ */
+
 app.use(function(req, res, next) {
-  var err = new Error('Not Found');
+  var err = new Error('404 Not Found');
   err.status = 404;
   next(err);
 });
 
-// error handlers
-
-// development error handler
-// will print stacktrace
 if (app.get('env') === 'development') {
   app.use((err, req, res, next) => {
     res.status(err.status || 500);
@@ -55,8 +68,6 @@ if (app.get('env') === 'development') {
   });
 }
 
-// production error handler
-// no stacktraces leaked to user
 app.use((err, req, res, next) => {
   res.status(err.status || 500);
   res.render('error', {
@@ -65,12 +76,10 @@ app.use((err, req, res, next) => {
   });
 });
 
-// lpad()
-String.prototype.lpad = function(padString, length) {
-    var str = this;
-    while (str.length < length)
-        str = padString + str;
-    return str;
-};
+/**
+ * Register handlebars helpers
+ */
+
+hbs.registerHelper('date', helpers.date);
 
 module.exports = app;

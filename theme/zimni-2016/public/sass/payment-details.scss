@@ -1,0 +1,66 @@
+.payment-details {
+  text-align: left;
+}
+
+.payment-details h1 {
+  color: gray;
+  font-size: 2em;
+  text-align: left;
+  line-height: 1.5;
+}
+
+.payment-details h2 {
+  padding-top: 2em;
+}
+
+.payment-details h3 {
+  color: gray;
+}
+
+.reg-status {
+  font-size: 1.2em;
+  color: #2A76A8;
+}
+
+.payment-info:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
+.payment-info-column {
+  width: 50%;
+  float: left;
+}
+
+.payment-info dt {
+  font-size: .9em;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: gray;
+}
+
+.payment-info dd {
+  margin: 0;
+  padding: .5em 0 2em 0;
+}
+
+.back-button {
+  background: none;
+  display: inline-block;
+  border: 2px solid #498FB3;
+  padding: .4em 1.2em;
+  border-radius: .4em;
+  color: #498FB3;
+  font-size: .75em;
+  font-family: 'Lato', sans-serif;
+  text-transform: uppercase;
+  font-weight: bold;
+  text-decoration: none;
+  cursor: pointer;
+
+  &:hover {
+    background: #498FB3;
+    color: white;
+  }
+}
